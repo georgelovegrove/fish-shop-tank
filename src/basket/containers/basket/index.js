@@ -14,7 +14,7 @@ class Basket extends Component {
   }
 
   render() {
-    const { basketItemsList } = this.props;
+    const { basketItemsList, basketLoading, basketError } = this.props;
 
     return (
       <div>
@@ -31,6 +31,13 @@ class Basket extends Component {
           }
           { basketItemsList.size === 0 && <p>Nothing in the basket.</p> }
         </div>
+        { basketItemsList.size > 0 &&
+          <div className="basket-status-wrapper">
+            { basketLoading && <p>Loading...</p> }
+            { !basketLoading && basketError && <p>Ooops: {basketError}</p> }
+            { !basketLoading && <button onClick={() => alert("That's all folks")} className="basket-checkout-button">Checkout</button> }
+          </div>
+        }
       </div>
     );
   }
@@ -46,6 +53,8 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = state => {
   return {
     basketItemsList: state.basket.get('itemsList'),
+    basketLoading: state.basket.get('basketLoading'),
+    basketError: state.basket.get('basketError'),
   };
 };
 
