@@ -1,37 +1,40 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import ProductItem from '../../../shared/components/product-item';
-import fishData from '../../../../lib/fish';
+import { loadProducts } from '../../modules/store';
+import { addBasketItem } from '../../../basket/modules/basket';
 
 import './store.css';
 
 class Store extends Component {
 
-  constructor() {
-    super();
-
-    this.state = {
-      productsList: [],
-    };
+  componentDidMount() {
+    this.props.onLoadProducts();
   }
 
-  componentDidMount() {
-    const { fishList } = fishData;
-    this.setState({ productsList: fishList });
+  addItemToBasket = (item) => () => {
+    const data = { item };
+    this.props.onAddBasketItem(data);
   }
 
   render() {
-    const { productsList } = this.state;
+    const { productsList, basketItemsList } = this.props;
 
     return (
       <div>
         <h3>Available fish</h3>
-        <p>Drag and drop the fish into the basket to check if they’re compatible.</p>
         <div className="store-list-wrapper">
           {
             productsList.map((product) => {
+              const id = product.get('id')
+              const name = product.get('name');
+
+              // Ignore any products already in the basket
+              if (basketItemsList.get(id)) return null;
+
               return (
-                <ProductItem name={product} />
+                <ProductItem key={id} name={name} icon={"/assets/add.svg"} onClick={this.addItemToBasket(product)}/>
               );
             })
           }
@@ -41,4 +44,19 @@ class Store extends Component {
   }
 }
 
-export default Store;
+export function mapDispatchToProps(dispatch) {
+  return {
+    onLoadProducts: () => dispatch(loadProducts()),
+    onAddBasketItem: (data) => dispatch(addBasketItem(data)),
+    dispatch,
+  };
+}
+
+const mapStateToProps = state => {
+  return {
+    productsList: state.store.get('productsList'),
+    basketItemsList: state.basket.get('itemsList'),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Store);

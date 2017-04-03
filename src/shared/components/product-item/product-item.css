@@ -12,6 +12,18 @@
   align-items: center;
 }
 
+.item-wrapper:hover {
+  cursor: pointer;
+  background-color: #ADD8E6;
+  border: 0px;
+}
+
 .item-name {
   flex: 1 1 auto;
+}
+
+.item-icon {
+  flex: 0 0 40px;
+  width: 20px;
+  height: 20px;
 }
