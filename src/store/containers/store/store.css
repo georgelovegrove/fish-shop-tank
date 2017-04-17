@@ -1,0 +1,9 @@
+.store-list-wrapper {
+  margin: 20px 0px 20px 0px;
+  border-radius: 5px;
+  border: 1px dotted #D3D3D3;
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

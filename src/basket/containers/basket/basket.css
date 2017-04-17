@@ -1,0 +1,28 @@
+.basket-list-wrapper {
+  margin: 20px 0px 20px 0px;
+  border-radius: 5px;
+  border: 1px solid #D3D3D3;
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.basket-status-wrapper {
+  margin: 20px 0px 20px 0px;
+  text-align: center;
+}
+
+.basket-checkout-button {
+  background-color: #fff;
+  border: 1px solid #D3D3D3;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.basket-checkout-button:hover {
+  background-color: #ADD8E6;
+  cursor: pointer;
+}
