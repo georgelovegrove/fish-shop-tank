@@ -1,5 +1,11 @@
 # fish-shop-tank
 
+## usage
+
+- requires .env with API url
+- npm install
+- npm start
+
 ## approach
 
 - Brief designing first, created the structure of the application, integrated state and then made the AJAX calls to connect to the backend.
